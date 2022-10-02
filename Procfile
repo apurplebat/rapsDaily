@@ -1,3 +1,3 @@
 # Procfile
 
-web: gunicorn rapsdaily.wsgi
+web: gunicorn rapsDaily.wsgi
