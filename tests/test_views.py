@@ -1,4 +1,9 @@
+"""rapsDaily test views
+
+testviews docstring
+"""
 # test_views.py
+#pylint: disable=missing-function-docstring
 
 def test_index_ok(client):
     # Make a GET request to / and store the response object
