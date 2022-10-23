@@ -105,11 +105,9 @@ class Comment(models.Model):
 	name = models.CharField(
 		max_length=40,
 		null=False,
-		help_text='type in your name',
 	)
 	email = models.EmailField(
 		null=False,
-		help_text='type in your email',
 	)
 	text = models.TextField(
 		max_length=150,
