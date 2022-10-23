@@ -62,7 +62,7 @@ class Post(models.Model):
 	)
 	slug = models.SlugField(
 		null=False,
-		help_text='The date & time this article was published',
+		help_text='Slug field for the article',
 		unique_for_date='published',  # Slug is unique for publication date
     )
 
@@ -104,9 +104,13 @@ class Comment(models.Model):
     )
 	name = models.CharField(
 		max_length=40,
-		null=False
+		null=False,
+		help_text='type in your name',
 	)
-	email = models.EmailField(null=False)
+	email = models.EmailField(
+		null=False,
+		help_text='type in your email',
+	)
 	text = models.TextField(
 		max_length=150,
 		null=False
