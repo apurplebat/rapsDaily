@@ -61,6 +61,12 @@ class CommentAdmin(admin.ModelAdmin):
 
     )
 
+    search_fields = (
+		'name',
+		'text',
+		'email',
+	)
+
     list_filter = (
     	'approved',
     )
