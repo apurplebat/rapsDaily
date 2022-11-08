@@ -22,7 +22,7 @@
 <h2>Popular Topics</h2>
 {% for topic in popular_topics %}
 <article>
-  <li><strong>{{ topic.name }} ({{ topic.blog_posts__count }})</strong></li>
+  <strong><li>{{ topic.name }} ({{ topic.blog_posts__count }})</li></strong>
 </article>
 {% endfor %}
 
