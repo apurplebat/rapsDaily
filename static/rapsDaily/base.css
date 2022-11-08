@@ -1,0 +1,124 @@
+/* blog/static/blog/base.css */
+
+html {
+  height: 100%; /* Use whole height of browser */
+}
+
+body {
+  display: grid;  /* Use CSS grid */
+  font-family: Arial, Helvetica, sans-serif;
+  grid-template-rows: auto auto 1fr auto;  /* Sticky footer */
+  margin: 0 auto;  /* Centers the page */
+  max-width: 1000px;  /* Set max width */
+  min-height: 100%;  /* Full height */
+  padding: 1rem;
+  background-image: url("raptors_bg.png");
+  background-size: cover;
+}
+
+/*
+ * Style the <a> tags. Have a consistent colour for both visited
+ * and unvisited links. Show underline on hover only.
+ */
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Style the header area */
+#site-header h1 {
+  padding: 0;
+  margin: 0;
+  color: #ffd633;
+  text-shadow: 2px 2px #ff5050;
+}
+
+#site-header p {
+  font-size: 0.9rem;
+  color: #ffd633;
+  padding: 0;
+  margin: 0;
+  text-shadow: 1px 1px #ff0000;
+}
+
+/* Style the top nav */
+#top-nav {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+#top-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+#top-nav li {
+  margin-top: 1rem;
+  list-style-type: none;
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+#top-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #5cd6d6;
+}
+
+#top-nav a:hover {
+  background-color: #ffcc66;
+}
+
+/* Style the main content */
+.latest-article-preview h2 {
+  color: #ff5050;
+}
+
+.latest-article-preview em {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: #ffffcc;
+}
+
+.latest-article-preview strong {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: #ffffcc;
+}
+
+.latest-article-preview article {
+  color: #ff3300;
+  width:305px;
+  padding:5px;
+  border-style:dashed;
+  border-width:1px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+.popular-topics li {
+  list-style-type: circle;
+}
+
+.popular-topics {
+  color: #ffcc66;
+  width:305px;
+  padding:5px;
+  border-style:dashed;
+  border-width:1px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  position:relative; left:675px; top:-620px;
+}
+
+
+/* Style the footer */
+#site-footer {
+  font-size: 0.9rem;
+  color: #ffffcc;
+}

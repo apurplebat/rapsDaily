@@ -1,8 +1,14 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Count
 
 # Create your models here.
 
+
+
+class TopicQuerySet(models.QuerySet):
+	def count_topics(self):
+		return self.annotate(Count('blog_posts')).values('name', 'blog_posts__count')
 
 class Topic(models.Model):
 	RAPTORS = 'Raptors'
@@ -22,6 +28,8 @@ class Topic(models.Model):
 		unique=True,  # Slug is unique for topic name
     )
 
+	objects = TopicQuerySet.as_manager()
+
 	class Meta:
 		# Sort by the `created` field. The `-` prefix
 		# specifies to order in descending/reverse order.
@@ -33,6 +41,9 @@ class Topic(models.Model):
 		return self.name
 
 
+class PostQuerySet(models.QuerySet):
+	def published(self):
+		return self.filter(status=self.model.PUBLISHED)
 
 
 
@@ -66,6 +77,7 @@ class Post(models.Model):
 		unique_for_date='published',  # Slug is unique for publication date
     )
 
+	objects = PostQuerySet.as_manager()
 
 	class Meta:
 		# Sort by the `created` field. The `-` prefix
@@ -88,9 +100,6 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title
-
-
-
 
 
 

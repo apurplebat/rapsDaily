@@ -1,0 +1,31 @@
+<!-- blog/templates/blog/home.html -->
+
+{% extends "rapsDaily/base.html" %}
+
+{% block main %}
+
+<section class="latest-article-preview">
+
+{% for post in latest_posts %}
+<article>
+  <h2>{{ post.title }} </h2>
+  <em>{{ post.published|timesince }} ago</em>
+  <strong>{{ post.content|linebreaks }}</strong>
+</article>
+{% endfor %}
+
+</section>
+
+
+
+<section class="popular-topics">
+<h2>Popular Topics</h2>
+{% for topic in popular_topics %}
+<article>
+  <li>{{ topic.name }} ({{ topic.blog_posts__count }})</li>
+</article>
+{% endfor %}
+
+</section>
+
+{% endblock %}
