@@ -9,7 +9,9 @@ from django.urls import reverse
 
 class TopicQuerySet(models.QuerySet):
 	def count_topics(self):
-		return self.annotate(Count('blog_posts')).values('name', 'slug', 'blog_posts__count')
+		return self.annotate(Count('blog_posts'))#.values('name', 'slug', 'blog_posts__count')
+
+
 
 	#def get_posts(self):
 	#	t = (Topic.objects.get('blog_posts')).id

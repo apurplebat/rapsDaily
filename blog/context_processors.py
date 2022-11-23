@@ -11,6 +11,6 @@ from django.db.models import Count
 
 def base_context(request):
 	popular_topics = models.Topic.objects.count_topics().order_by('-blog_posts__count')[:3]
-	#popular_topics = models.Topic.objects.all()
+	#popular_topics = models.Topic.objects.all() .filter(topics=self.get_object()).published().order_by('-published')
 	print(popular_topics)
 	return {'popular_topics': popular_topics}
