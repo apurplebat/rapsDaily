@@ -21,6 +21,7 @@ from django.urls import path
 from blog import views   # Import the views module
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Add our index view to the URL patterns
-    path('', views.home, name='home'),
+    path('admin/',admin.site.urls),
+    # path('', views.home, name='home'), # Set root to home view
+    path('', views.HomeView.as_view(), name='home'),
 ]

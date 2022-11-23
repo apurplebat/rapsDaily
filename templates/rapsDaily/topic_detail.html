@@ -1,15 +1,18 @@
 <!-- blog/templates/blog/home.html -->
-
 {% extends "rapsDaily/base.html" %}
+{% block page_title %}Topics: Detailed View{% endblock %}
+
 
 {% block main %}
+<section class="topics-header">
+<h1>{{ topic.name }}</h1>
+</section>
 
 <section class="latest-article-preview">
-
-{% for post in latest_posts %}
+{% for post in post_list %}
 <article>
   <h2>{{ post.title }} </h2>
-  <em>{{ post.published|timesince }} ago</em>
+  <em><span class="published">{{ post.published|timesince }} ago</em>
   <strong>{{ post.content|linebreaks }}</strong>
 </article>
 {% endfor %}

@@ -1,19 +1,19 @@
 <!-- blog/templates/blog/home.html -->
-
 {% extends "rapsDaily/base.html" %}
+{% block page_title %}Topics{% endblock %}
+
 
 {% block main %}
+<section class="topics-header">
+<h1>All Topics</h1>
+</section>
 
-<section class="latest-article-preview">
-
-{% for post in latest_posts %}
-<article>
-  <h2>{{ post.title }} </h2>
-  <em>{{ post.published|timesince }} ago</em>
-  <strong>{{ post.content|linebreaks }}</strong>
-</article>
+<section class="all-topics">
+{% for topic in topics %}
+  <article>
+    <h2><a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></h2>
+  </article>
 {% endfor %}
-
 </section>
 
 

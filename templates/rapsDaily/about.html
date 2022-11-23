@@ -4,19 +4,6 @@
 
 {% block main %}
 
-<section class="latest-article-preview">
-
-{% for post in latest_posts %}
-<article>
-  <h2>{{ post.title }} </h2>
-  <em>{{ post.published|timesince }} ago</em>
-  <strong>{{ post.content|linebreaks }}</strong>
-</article>
-{% endfor %}
-
-</section>
-
-
 
 <section class="popular-topics">
 <h2>Popular Topics</h2>

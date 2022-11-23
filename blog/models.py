@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import Count
+from django.urls import reverse
 
 # Create your models here.
 
@@ -8,7 +9,16 @@ from django.db.models import Count
 
 class TopicQuerySet(models.QuerySet):
 	def count_topics(self):
-		return self.annotate(Count('blog_posts')).values('name', 'blog_posts__count')
+		return self.annotate(Count('blog_posts')).values('name', 'slug', 'blog_posts__count')
+
+	#def get_posts(self):
+	#	t = (Topic.objects.get('blog_posts')).id
+	#	return Post.objects.filter(id=t)
+		#t = Topic.objects.get('blog_posts')
+		#t.post_set.all()
+		#return self.filter(id=1)
+	#	temp = (User.objects.get(username=user)).id
+	#	return Post.objects.filter(author=temp)
 
 class Topic(models.Model):
 	RAPTORS = 'Raptors'
@@ -30,6 +40,20 @@ class Topic(models.Model):
 
 	objects = TopicQuerySet.as_manager()
 
+	def get_absolute_url(self):
+		return reverse(
+			'topic-detail',
+			kwargs={
+			'slug': self.slug
+			}
+		)
+
+	#def get_posts(self):
+	#	t = Topic.objects.get('blog_posts')
+	#	t.post_set.all()
+
+
+
 	class Meta:
 		# Sort by the `created` field. The `-` prefix
 		# specifies to order in descending/reverse order.
@@ -39,6 +63,8 @@ class Topic(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
 
 
 class PostQuerySet(models.QuerySet):
@@ -76,8 +102,20 @@ class Post(models.Model):
 		help_text='Slug field for the article',
 		unique_for_date='published',  # Slug is unique for publication date
     )
-
 	objects = PostQuerySet.as_manager()
+
+	def get_absolute_url(self):
+		if self.published:
+			kwargs = {
+			'year': self.published.year,
+			'month': self.published.month,
+			'day': self.published.day,
+			'slug': self.slug
+			}
+		else:
+			kwargs = {'pk': self.pk}
+
+		return reverse('post-detail', kwargs=kwargs)
 
 	class Meta:
 		# Sort by the `created` field. The `-` prefix

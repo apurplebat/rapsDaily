@@ -1,0 +1,33 @@
+<!-- blog/templates/blog/home.html -->
+{% extends "rapsDaily/base.html" %}
+{% block page_title %}Topics: Detailed View{% endblock %}
+
+
+{% block main %}
+<section class="topics-header">
+<h1>{{ post.title }}</h1>
+</section>
+<article id="post-detail-article">
+	{% for top in tops_list %}
+	<span class="author"><a href="{{ top.get_absolute_url }}">{{ top.name }}</a> | </span>
+	{% endfor %}
+  <span class="published">Published on: <time>{{ post.published }}</time></span><br>
+  <span class="author">Published by: {{ post.author }}</span>
+
+  <section class="content">{{ post.content|linebreaks }}</section>
+</article>
+
+
+
+
+<section class="popular-topics">
+<h2>Popular Topics</h2>
+{% for topic in popular_topics %}
+<article>
+  <strong><li><a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a> ({{ topic.blog_posts__count }})</li></strong>
+</article>
+{% endfor %}
+
+</section>
+
+{% endblock %}
