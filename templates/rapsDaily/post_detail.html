@@ -13,11 +13,12 @@
 	{% endfor %}
   <span class="published">Published on: <time>{{ post.published }}</time></span><br>
   <span class="author">Published by: {{ post.author }}</span>
-
-  <section class="content">{{ post.content|linebreaks }}</section>
+  <section class="content">{{ post.content|safe|linebreaks }}</section>
 </article>
 
-
+{% if post.photo %}
+	<img src="{{ post.photo.url }}" width="100%" alt="Banner image">
+{% endif %}
 
 
 <section class="popular-topics">

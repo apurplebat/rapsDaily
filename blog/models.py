@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Count
 from django.urls import reverse
-
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
@@ -85,7 +85,7 @@ class Post(models.Model):
 
 
 	title = models.CharField(max_length=255)
-	content = models.TextField()
+	content = RichTextUploadingField()
 	created = models.DateTimeField(auto_now_add=True)  # Sets on create
 	updated = models.DateTimeField(auto_now=True)  # Updates on each save
 	status = models.CharField(
@@ -105,6 +105,7 @@ class Post(models.Model):
 		unique_for_date='published',  # Slug is unique for publication date
     )
 	objects = PostQuerySet.as_manager()
+
 
 	def get_absolute_url(self):
 		if self.published:
@@ -136,10 +137,28 @@ class Post(models.Model):
         Topic,  # associating topics with posts
         related_name='blog_posts'  # related name
     )
-
-
+	photo = models.ImageField(
+        blank=True,
+        null=True,
+        help_text='A photo to be submitted.'
+    )
+    
 	def __str__(self):
 		return self.title
+
+
+class Contest(models.Model):
+    first_name = models.CharField(max_length=20, null=False)
+    last_name = models.CharField(max_length=20, null=False)
+    email = models.EmailField(null=False)
+    photo = models.ImageField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted']
+
+   # def __str__(self):
+   #     return f'{self.submitted.date()}: {self.email}'
 
 
 

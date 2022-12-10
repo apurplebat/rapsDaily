@@ -8,6 +8,13 @@
 </head>
 
 <body>
+  {% if messages %}
+  <div class="django-messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
   <!-- The header -->
   <header id="site-header">
      <h1>RapsDaily</h1>
@@ -22,6 +29,7 @@
       <li><a href="{% url 'post-list' %}">Posts</a></li>
       <li><a href="{% url 'topic-list' %}">Topics</a></li>
       <li><a href="#">Contact</a></li>
+      <li><a href="{% url 'photo-contest' %}">Contest</a></li>
     </ul>
   </nav>
 
@@ -36,5 +44,14 @@
     <!-- Print copyright with the current year -->
     Created by Brandon Mathew &copy;{% now 'Y' %}
   </footer>
+
+
+  <div class="wrapper">
+    <header ... >
+      {# ... # }
+    {# ... bottom of page ... #}
+    </footer>
+  {# close wrapper #}
+  </div>
 </body>
 </html>

@@ -16,7 +16,9 @@ Including another URLconf
 # rapsDaily/urls.py
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from blog import views   # Import the views module
 
@@ -35,5 +37,7 @@ urlpatterns = [
     	name='post-detail'),
     path('topics/<slug:slug>/',
     	views.TopicDetailView.as_view(),
-    	name='topic-detail')
-]
+    	name='topic-detail'),
+    path('photo-contest/', views.PhotoContestView.as_view(), name='photo-contest'),
+    path('ckeditor/', include('ckeditor_uploader.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

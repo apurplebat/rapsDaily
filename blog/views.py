@@ -5,9 +5,13 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
+from django.views.generic import CreateView
+from django.views.generic import FormView
 from django.http import HttpResponse
-from blog import models
+from blog import forms, models
 from django.db.models import Count
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 class HomeView(TemplateView):
@@ -72,3 +76,26 @@ class TopicDetailView(DetailView):
 		context['post_list'] = models.Post.objects.filter(topics=self.get_object()).published().order_by('-published')
 		return context
 
+
+
+class PhotoContestView(CreateView):
+    template_name = 'rapsDaily/form_photo.html'
+    model = models.Contest
+    #form_class = forms.PhotoContestForm
+    success_url = reverse_lazy('home')
+    fields = [
+        'first_name',
+        'last_name',
+        'email',
+        'photo',
+    ]
+
+    def form_valid(self, form):
+        # Create a "success" message
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you for submitting!'
+        )
+        # Continue with default behaviour
+        return super().form_valid(form)
